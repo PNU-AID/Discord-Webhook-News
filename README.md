@@ -1,5 +1,7 @@
-# 인공지능 대회 정보 알림 디스코드 웹 훅
+# 인공지능 관련 뉴스 전달 디스코드 웹훅
 
-부산대 인공지능 동아리 AID 디스코드 웹 훅 repo
+## how to use
+.env 파일 생성
+`DISCORD_URL=<디스코드 채널 웹 훅 URL>`
 
-현재 Dacon, Kaggle, AIConnect, AIFacotry 크롤링하여 전달
+github action cron
