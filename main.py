@@ -13,7 +13,7 @@ want_to_include = [
     "AI", "ai", "ML", "GPT", "LLM",
     "인공지능", "딥러닝", "머신러닝"
 ]
-days_included = ["초전", "분전", "시간전", "1일전"]
+days_included = ["1분전", "2분전", "3분전", "4분전", "5분전"]
 
 headers = {"Content-Type": "application/json"}
 messages = []
@@ -59,4 +59,3 @@ else:
 for message in messages:
     data = {"content": message}
     response = requests.post(DISCORD_URL, json=data)
-    break
