@@ -13,7 +13,7 @@ want_to_include = [
     "AI", "ai", "ML", "GPT", "LLM",
     "인공지능", "딥러닝", "머신러닝"
 ]
-days_included = ["1분전", "2분전", "3분전", "4분전", "5분전"]
+days_included = [f"{i}분전" for i in range(1, 16)]
 
 headers = {"Content-Type": "application/json"}
 messages = []
@@ -59,7 +59,4 @@ if len(messages) != 0:
     for message in messages:
         data = {"content": message}
         response = requests.post(DISCORD_URL, json=data)
-        
-data = {"content": "github action test중..."}
-response = requests.post(DISCORD_URL, json=data)
 
