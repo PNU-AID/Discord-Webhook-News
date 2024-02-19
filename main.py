@@ -55,7 +55,11 @@ if response.status_code == 200:
 else:
     print(f"Error: {response.status_code}")
 
+if len(messages) != 0:
+    for message in messages:
+        data = {"content": message}
+        response = requests.post(DISCORD_URL, json=data)
+        
+data = {"content": "github action test중..."}
+response = requests.post(DISCORD_URL, json=data)
 
-for message in messages:
-    data = {"content": message}
-    response = requests.post(DISCORD_URL, json=data)
