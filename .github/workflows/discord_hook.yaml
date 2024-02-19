@@ -45,7 +45,7 @@ jobs:
     - name: make .env
       run: |
         touch .env
-        echo "${{ secrets.DISCORD_WEBHOOK_URL }}" >> .env
+        echo "${{ secrets.DISCORD_URL }}" >> .env
 
     - name: Run Crawling
       run: |
