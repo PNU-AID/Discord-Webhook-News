@@ -42,6 +42,11 @@ jobs:
       if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
       run: poetry install --no-interaction --no-root
 
+    - name: make .env
+      run: |
+        touch .env
+        echo "${{ secrets.DISCORD_WEBHOOK_URL }}" >> .env
+
     - name: Run Crawling
       run: |
         source .venv/bin/activate
