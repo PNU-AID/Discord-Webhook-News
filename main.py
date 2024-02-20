@@ -59,4 +59,4 @@ if len(messages) != 0:
     for message in messages:
         data = {"content": message}
         response = requests.post(DISCORD_URL, json=data)
-
+messages.clear()
