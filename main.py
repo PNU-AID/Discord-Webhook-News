@@ -14,7 +14,6 @@ want_to_include = [
     "인공지능", "딥러닝", "머신러닝"
 ]
 days_included = [f"{i}분전" for i in range(1, 16)]
-print(days_included)
 
 headers = {"Content-Type": "application/json"}
 messages = []
@@ -56,8 +55,7 @@ if response.status_code == 200:
 else:
     print(f"Error: {response.status_code}")
 
-# if len(messages) != 0:
-#     for message in messages:
-#         data = {"content": message}
-#         response = requests.post(DISCORD_URL, json=data)
-messages.clear()
+if len(messages) != 0:
+    for message in messages:
+        data = {"content": message}
+        response = requests.post(DISCORD_URL, json=data)
