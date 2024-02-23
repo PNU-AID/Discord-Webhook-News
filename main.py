@@ -4,16 +4,15 @@ import requests
 from bs4 import BeautifulSoup
 from dotenv import load_dotenv
 
-load_dotenv()
-
-DISCORD_URL = os.environ.get("DISCORD_URL")
+load_dotenv(dotenv_path=".env")
+DISCORD_URL = os.getenv("DISCORD_URL")
 GEEKNEWS_BASEURL = "https://news.hada.io/"
 GEEKNEWS_URL = "https://news.hada.io/new"
 want_to_include = [
-    "AI", "ai", "ML", "GPT", "LLM",
+    "AI", "ai", "ML", "GPT", "LLM", "Diffusion",
     "인공지능", "딥러닝", "머신러닝"
 ]
-days_included = [f"{i}분전" for i in range(1, 16)]
+days_included = [f"{i}분전" for i in range(1, 20)]
 
 headers = {"Content-Type": "application/json"}
 messages = []
@@ -54,8 +53,10 @@ if response.status_code == 200:
 
 else:
     print(f"Error: {response.status_code}")
-
+    
 if len(messages) != 0:
     for message in messages:
+
         data = {"content": message}
+
         response = requests.post(DISCORD_URL, json=data)
