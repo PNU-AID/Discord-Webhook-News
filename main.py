@@ -13,7 +13,6 @@ want_to_include = [
     "인공지능", "딥러닝", "머신러닝"
 ]
 days_included = [f"{i}분전" for i in range(1, 20)]
-days_included += ["1일전", "2일전"]
 
 
 headers = {"Content-Type": "application/json"}
