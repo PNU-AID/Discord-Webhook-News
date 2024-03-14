@@ -30,9 +30,14 @@ if response.status_code == 200:
         topic_url = topic.find("span", class_="topicurl")
         topic_info = topic.find("div", class_="topicinfo")
         topic_date = topic_info.text.split(" ")[4]
-        topic_link = topic_content.find("a")["href"].strip()
+
         title = topic_title.a.h1.string
-        description = topic_content.a.string
+        topic_link = topic_title.find("a")["href"].strip()
+        description = ""
+        if topic_content is not None:
+            topic_link = topic_content.find("a")["href"].strip()
+            description = topic_content.a.string
+
         flag = False
 
         if topic_url.string is None:
