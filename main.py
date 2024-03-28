@@ -8,10 +8,7 @@ load_dotenv(dotenv_path=".env")
 DISCORD_URL = os.getenv("DISCORD_URL")
 GEEKNEWS_BASEURL = "https://news.hada.io/"
 GEEKNEWS_URL = "https://news.hada.io/new"
-want_to_include = [
-    "AI", "ai", "ML", "GPT", "LLM", "Diffusion",
-    "인공지능", "딥러닝", "머신러닝"
-]
+want_to_include = ["AI", "ai", "ML", "GPT", "LLM", "Diffusion", "인공지능", "딥러닝", "머신러닝"]
 days_included = [f"{i}분전" for i in range(1, 20)]
 
 
@@ -42,12 +39,12 @@ if response.status_code == 200:
 
         if topic_url.string is None:
             continue
-        
+
         for days in days_included:
             if days == topic_date:
                 flag = True
                 break
-            
+
         if not flag:
             continue
 
@@ -61,13 +58,10 @@ else:
     print(f"Error: {response.status_code}")
 
 
-print("Discord URL:", DISCORD_URL)
 if len(messages) != 0:
     for message in messages:
-
         data = {"content": message}
 
         response = requests.post(DISCORD_URL, json=data)
         if response.status_code == 404:
             print("response code is 404, check discord url or action variable")
-            

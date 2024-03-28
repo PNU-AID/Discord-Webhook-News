@@ -3,13 +3,10 @@
 ```sh
 # python version ^3.10.x
 # pyenv local 3.10.x
-# install poetry
-# poetry config virtualenvs.in-project true
-# poetry config virtualenvs.path "./.venv"
+# python -m venv .venv
+# source ./venv/bin/activate
 
-poetry install
-
-poetry shell
+pip install -r requirements.txt
 pre-commit install
 
 ```
