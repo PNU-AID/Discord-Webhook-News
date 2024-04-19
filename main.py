@@ -8,7 +8,7 @@ load_dotenv(dotenv_path=".env")
 DISCORD_URL = os.getenv("DISCORD_URL")
 GEEKNEWS_BASEURL = "https://news.hada.io/"
 GEEKNEWS_URL = "https://news.hada.io/new"
-want_to_include = ["AI", "ai", "ML", "GPT", "LLM", "Diffusion", "인공지능", "딥러닝", "머신러닝"]
+want_to_include = ["AI", "ai", "ML", "GPT", "LLM", "Diffusion", "인공지능", "딥러닝", "머신러닝", "사전학습", "파인튜닝"]
 days_included = [f"{i}분전" for i in range(1, 20)]
 
 
@@ -20,7 +20,6 @@ if response.status_code == 200:
     html = response.text
     soup = BeautifulSoup(html, "html.parser")
     topics = soup.find_all("div", class_="topic_row")
-
     for topic in topics:
         topic_title = topic.find("div", class_="topictitle")
         topic_content = topic.find("div", class_="topicdesc")
@@ -28,13 +27,16 @@ if response.status_code == 200:
         topic_info = topic.find("div", class_="topicinfo")
         topic_date = topic_info.text.split(" ")[4]
 
-        title = topic_title.a.h1.string
-        topic_link = topic_title.find("a")["href"].strip()
+        if topic_title.a is None:
+            title = topic_title.h1.string
+        else:
+            title = topic_title.a.h1.string
+            # topic_link = topic_title.find("a")["href"].strip()
+
         description = ""
         if topic_content is not None:
-            topic_link = topic_content.find("a")["href"].strip()
             description = topic_content.a.string
-
+            topic_link = topic_content.find("a")["href"].strip()
         flag = False
 
         if topic_url.string is None:
@@ -61,7 +63,6 @@ else:
 if len(messages) != 0:
     for message in messages:
         data = {"content": message}
-
         response = requests.post(DISCORD_URL, json=data)
         if response.status_code == 404:
             print("response code is 404, check discord url or action variable")
