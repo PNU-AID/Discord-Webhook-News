@@ -1,8 +1,8 @@
-import os
+import os # os모듈 불러오기 (운영체제와의 상호작용을 돕는 다양한 기능 제공 )
 
-import requests
-from bs4 import BeautifulSoup
-from dotenv import load_dotenv
+import requests # requests모듈 불러오기(http, https 웹 사이트에 요청하기 위해 자주 사용되는 모듈)
+from bs4 import BeautifulSoup # 웹 데이터 크롤링 도는 스크래핑을 할 때 사용하는 python 라이브러리
+from dotenv import load_dotenv # .env 파일에서 환경 변수를 로드하는 라이브러리
 
 load_dotenv(dotenv_path=".env")
 DISCORD_URL = os.getenv("DISCORD_URL")
