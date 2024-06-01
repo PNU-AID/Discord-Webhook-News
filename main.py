@@ -4,12 +4,12 @@ import requests # requests모듈 불러오기(http, https 웹 사이트에 요�
 from bs4 import BeautifulSoup # 웹 데이터 크롤링 도는 스크래핑을 할 때 사용하는 python 라이브러리
 from dotenv import load_dotenv # .env 파일에서 환경 변수를 로드하는 라이브러리
 
-load_dotenv(dotenv_path=".env")
-DISCORD_URL = os.getenv("DISCORD_URL")
-GEEKNEWS_BASEURL = "https://news.hada.io/"
+load_dotenv(dotenv_path=".env") #현재 작업 디렉토리에 있는 .env 파일에서 환경 변수를 로드
+DISCORD_URL = os.getenv("DISCORD_URL") #os.getenv()는 함수는 지정된 환경 변수의 값을 반환하거나, 해당 환경 변수가 존재하지 않으면 None을 반환
+GEEKNEWS_BASEURL = "https://news.hada.io/" #
 GEEKNEWS_URL = "https://news.hada.io/new"
 want_to_include = ["AI", "ai", "ML", "GPT", "LLM", "Diffusion", "인공지능", "딥러닝", "머신러닝", "사전학습", "파인튜닝"]
-days_included = [f"{i}분전" for i in range(1, 20)]
+days_included = [f"{i}분전" for i in range(1, 60)]
 
 
 headers = {"Content-Type": "application/json"}
@@ -37,7 +37,10 @@ if response.status_code == 200:
         if topic_content is not None:
             description = topic_content.a.string
             topic_link = topic_content.find("a")["href"].strip()
+        else:
+            topic_link = topic_title.find("a")["href"].strip()
         flag = False
+
 
         if topic_url.string is None:
             continue
