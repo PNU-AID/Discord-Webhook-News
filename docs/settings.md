@@ -9,4 +9,6 @@
 pip install -r requirements.txt
 pre-commit install
 
+python3 main.py
+
 ```
