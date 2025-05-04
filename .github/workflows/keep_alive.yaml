@@ -1,0 +1,16 @@
+name: Keep GitHub Actions Alive
+
+on:
+  schedule:
+    - cron: "0 0 1 */1 *" # 매달 1일 UTC 자정 (한국 기준 오전 9시)
+
+permissions:
+  actions: write
+
+jobs:
+  keepalive-job:
+    name: Keepalive Workflow
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: gautamkrishnar/keepalive-workflow@v2
