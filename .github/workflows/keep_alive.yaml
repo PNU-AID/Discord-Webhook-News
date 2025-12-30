@@ -2,7 +2,7 @@ name: Keep GitHub Actions Alive
 
 on:
   schedule:
-    - cron: "0 0 1 * *" # 매달 1일에 한 번만 실행해도 충분합니다 (60일 제한이므로)
+    - cron: "0 0 1 * *" # 매달 1일 실행
   workflow_dispatch:
 
 permissions:
@@ -14,15 +14,20 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+        with:
+          fetch-depth: 0 # 전체 이력을 가져와야 브랜치 전환이 원활함
 
       - name: Run keepalive script
         run: |
-          # 봇 계정으로 설정
+          # 봇 계정 설정
           git config --global user.name "github-actions[bot]"
           git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          # 내용 없는 빈 커밋 생성
+          # [핵심 변경] main이 아닌 'keep-alive'라는 브랜치로 전환 (없으면 생성)
+          git checkout -B keep-alive
+
+          # 빈 커밋 생성
           git commit --allow-empty -m "maint: keep workflow alive"
 
-          # 푸시
-          git push
+          # [핵심 변경] keep-alive 브랜치로 푸시
+          git push -f origin keep-alive
